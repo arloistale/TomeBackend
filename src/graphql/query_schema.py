@@ -1,16 +1,11 @@
+from src.graphql.aphorism_resolvers import get_aphorisms
 import strawberry
+from datetime import datetime
+from strawberry.types import Info
 
 from pydantic import typing
 
 from src.graphql.aphorism import Aphorism
-
-def get_aphorisms():
-    return [
-        Aphorism(
-            title="The Great Gatsby",
-            content="F. Scott Fitzgerald",
-        ),
-    ]
 
 @strawberry.type
 class Query:
