@@ -28,26 +28,36 @@ def get_aphorisms() -> List[Aphorism]:
 
     return aphorisms
 
+def __get_already_presented_aphorism(current_date, aphorisms: List[Aphorism]) -> Optional[Aphorism]:
+     matching = (item for item in aphorisms if item.presented_at is not None and item.presented_at.date() == current_date)
+
+     first_matching_aphorism = next(matching, None)
+     
+     return first_matching_aphorism
+
 def present_random_aphorism() -> (Optional[Aphorism], Optional[any]):
-        current_datetime = datetime.now(timezone.utc)
+    current_datetime = datetime.now(timezone.utc)
 
-        aphorisms = get_aphorisms()
+    aphorisms = get_aphorisms()
 
-        if any(item.presented_at is not None and item.presented_at.date() == current_datetime.date() for item in aphorisms):
-            return None, "Already presented an aphorism today."
+    already_presented = __get_already_presented_aphorism(current_datetime.date(), aphorisms)
 
-        aphorism = select_random_aphorism_weighted(aphorisms)
+    if already_presented is not None:
+        print("Rejected presentation comparison", already_presented.presented_at.date(), current_datetime.date())
+        return None, f"Already presented an aphorism today at: {already_presented.presented_at.isoformat()}"
 
-        print("selected", aphorism.id, ":", aphorism.title)
+    aphorism = select_random_aphorism_weighted(aphorisms)
 
-        current_date_iso = current_datetime.isoformat()
+    print("selected", aphorism.id, ":", aphorism.title)
 
-        client\
-            .table('aphorisms')\
-            .update({'presented_at': current_date_iso})\
-            .eq('id', aphorism.id)\
-            .execute()
+    current_date_iso = current_datetime.isoformat()
 
-        print("set presented", aphorism.id, ":", aphorism.title)
-    
-        return aphorism, None
+    client\
+        .table('aphorisms')\
+        .update({'presented_at': current_date_iso})\
+        .eq('id', aphorism.id)\
+        .execute()
+
+    print("set presented", aphorism.id, ":", aphorism.title)
+
+    return aphorism, None
