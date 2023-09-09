@@ -14,7 +14,10 @@ schema = strawberry.Schema(query=Query, mutation=Mutation, config=StrawberryConf
 def create_app():
     app = FastAPI()
     
-    graphql_app = GraphQLRouter(schema)
+    graphql_app = GraphQLRouter(
+        schema,
+        graphiql=True
+    )
     app.include_router(graphql_app, prefix="/graphql")
 
     app.add_middleware(

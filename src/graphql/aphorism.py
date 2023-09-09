@@ -7,5 +7,5 @@ class Aphorism:
     id: strawberry.ID
     title: str
     content: str
-    createdAt: datetime
-    presentedAt: typing.Optional[datetime] = Field(default_factory=datetime.now)
+    created_at: datetime
+    presented_at: typing.Optional[datetime] = Field(default_factory=datetime.now)

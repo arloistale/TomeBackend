@@ -1,12 +1,33 @@
+from src.graphql.aphorism import Aphorism
+from src.graphql.aphorism_resolvers import present_random_aphorism
 import strawberry
 
-from pydantic import typing
+from typing import Annotated, Optional, Union
 
 from strawberry.types import Info
+
+@strawberry.type
+class PresentRandomAphorismSuccess:
+    aphorism: Aphorism
+
+@strawberry.type 
+class AphorismAlreadyPresentedError:
+    message: str
+
+Response = Annotated[
+    Union[PresentRandomAphorismSuccess, AphorismAlreadyPresentedError], 
+    strawberry.union("PresentRandomAphorismResponse"),
+]
 
 @strawberry.type
 class Mutation:
 
     @strawberry.mutation
-    async def test(self) -> None:
-        print("hello")
+    def present_random_aphorism(self) -> Response:
+
+        aphorism, error = present_random_aphorism()
+
+        if error is not None:
+            return AphorismAlreadyPresentedError(message=error)
+
+        return PresentRandomAphorismSuccess(aphorism=aphorism)
