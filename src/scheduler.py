@@ -25,6 +25,6 @@ async def __execute_present_random_aphorism():
 def create_scheduler() -> AsyncIOScheduler:
     scheduler = AsyncIOScheduler()
 
-    scheduler.add_job(__execute_present_random_aphorism, 'interval', hours=12)
+    scheduler.add_job(__execute_present_random_aphorism, 'interval', hours=6)
 
     return scheduler
