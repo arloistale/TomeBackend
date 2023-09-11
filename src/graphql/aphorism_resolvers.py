@@ -24,8 +24,6 @@ def get_aphorisms() -> List[Aphorism]:
         )
         aphorisms.append(aphorism)
 
-    print("fetched", len(aphorisms), "aphorisms")
-
     return aphorisms
 
 def __get_already_presented_aphorism(current_date, aphorisms: List[Aphorism]) -> Optional[Aphorism]:
