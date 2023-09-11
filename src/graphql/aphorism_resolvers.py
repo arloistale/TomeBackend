@@ -35,7 +35,7 @@ def __get_already_presented_aphorism(current_date, aphorisms: List[Aphorism]) ->
      
      return first_matching_aphorism
 
-def present_random_aphorism() -> (Optional[Aphorism], Optional[any]):
+def present_random_aphorism() -> (Optional[Aphorism], Optional[str]):
     current_datetime = datetime.now(timezone.utc)
 
     aphorisms = get_aphorisms()
@@ -43,7 +43,6 @@ def present_random_aphorism() -> (Optional[Aphorism], Optional[any]):
     already_presented = __get_already_presented_aphorism(current_datetime.date(), aphorisms)
 
     if already_presented is not None:
-        print("Rejected presentation comparison", already_presented.presented_at.date(), current_datetime.date())
         return None, f"Already presented an aphorism today at: {already_presented.presented_at.isoformat()}"
 
     aphorism = select_random_aphorism_weighted(aphorisms)
