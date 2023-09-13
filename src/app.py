@@ -20,7 +20,7 @@ def create_app():
     )
     app.include_router(graphql_app, prefix="/graphql")
 
-    ALLOWED_ORIGINS = ["https://jonsreflections.org", "http://localhost:3000"]
+    ALLOWED_ORIGINS = ["*"]
 
     app.add_middleware(
         CORSMiddleware,
