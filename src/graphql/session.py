@@ -1,6 +1,7 @@
+import os
 from supabase import create_client, Client
 
-supabaseUrl = 'https://dmrrzywklppzrnzporhn.supabase.co'
-supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRtcnJ6eXdrbHBwenJuenBvcmhuIiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTM1MDE4ODEsImV4cCI6MjAwOTA3Nzg4MX0.tQDYR2vNJlv7_7wHfaphrc3SEauezHI07ngGUM7HwSY"
+supabaseUrl = os.environ.get("SUPABASE_URL")
+supabaseKey = os.environ.get("SUPABASE_KEY")
 
 client: Client = create_client(supabaseUrl, supabaseKey);
