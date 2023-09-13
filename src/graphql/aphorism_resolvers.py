@@ -8,9 +8,8 @@ from src.graphql.session import client
 def get_aphorisms() -> List[Aphorism]:
     result = client.table('aphorisms').select('*').execute()
 
-    # TODO: Figure out error handling
-    #if result.status_code != 200:
-        #raise Exception("Supabase request failed.")
+    if result.status_code != 200:
+        raise Exception(f"Supabase request failed: {result.status_code}")
     
     aphorisms = []
 
