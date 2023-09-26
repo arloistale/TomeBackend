@@ -20,14 +20,11 @@ def __calculate_weight(item: Aphorism, current_datetime: datetime):
 
 def select_random_aphorism_weighted(list: list[Aphorism]):
     current_datetime = datetime.now(timezone.utc)
-
-    presented_ats = []
+    
     weights = []
 
     for item in list:
         weight = __calculate_weight(item, current_datetime)
-
-        presented_ats.append('none' if item.presented_at is None else f'{item.presented_at.year}-{item.presented_at.day}')
         weights.append(weight) 
 
     selected_item = random.choices(list, weights=weights, k=1)[0]
