@@ -1,7 +1,5 @@
 from src.graphql.aphorism_resolvers import get_aphorisms
 import strawberry
-from datetime import datetime
-from strawberry.types import Info
 
 from pydantic import typing
 

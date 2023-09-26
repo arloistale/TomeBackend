@@ -2,9 +2,7 @@ from src.graphql.aphorism import Aphorism
 from src.graphql.aphorism_resolvers import present_random_aphorism
 import strawberry
 
-from typing import Annotated, Optional, Union
-
-from strawberry.types import Info
+from typing import Annotated, Union
 
 @strawberry.type
 class PresentRandomAphorismSuccess:

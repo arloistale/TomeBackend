@@ -1,6 +1,5 @@
 from datetime import datetime, timezone
 from typing import List, Optional
-from src.graphql.aphorism_helpers import select_random_aphorism_weighted
 
 from src.graphql.aphorism import Aphorism
 from src.graphql.session import client
@@ -30,6 +29,8 @@ def __get_already_presented_aphorism(current_date, aphorisms: List[Aphorism]) ->
      return first_matching_aphorism
 
 def present_random_aphorism() -> (Optional[Aphorism], Optional[str]):
+    from src.graphql.aphorism_helpers import select_random_aphorism_weighted
+    
     current_datetime = datetime.now(timezone.utc)
 
     aphorisms = get_aphorisms()

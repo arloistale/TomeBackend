@@ -30,8 +30,6 @@ def select_random_aphorism_weighted(list: list[Aphorism]):
         presented_ats.append('none' if item.presented_at is None else f'{item.presented_at.year}-{item.presented_at.day}')
         weights.append(weight) 
 
-    print("items:", presented_ats, "w:", weights)
-
     selected_item = random.choices(list, weights=weights, k=1)[0]
 
     return selected_item
