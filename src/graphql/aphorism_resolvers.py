@@ -42,8 +42,6 @@ def present_random_aphorism() -> (Optional[Aphorism], Optional[str]):
 
     aphorism = select_random_aphorism_weighted(aphorisms)
 
-    print("selected", aphorism.id, ":", aphorism.title)
-
     current_date_iso = current_datetime.isoformat()
 
     client\
